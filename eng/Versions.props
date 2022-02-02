@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  <PropertyGroup>
+    <!-- This repo version -->
+    <VersionPrefix>0.26</VersionPrefix>
+    <PreReleaseVersionLabel>beta</PreReleaseVersionLabel>
+    <!-- Opt-out repo features -->
+    <UsingToolXliff>false</UsingToolXliff>
+    <!-- Libs -->
+    <MicrosoftSourceLinkGitHubVersion>1.2.0-beta-22071-02</MicrosoftSourceLinkGitHubVersion>
+    <!-- Used to flow Source Link version through Arcade SDK -->
+    <MicrosoftSourceLinkVersion>$(MicrosoftSourceLinkGitHubVersion)</MicrosoftSourceLinkVersion>
+    <MicrosoftTemplateEngineTasksVersion>7.0.100-alpha.1.21601.1</MicrosoftTemplateEngineTasksVersion>
+  </PropertyGroup>
+</Project>

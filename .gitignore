@@ -35,6 +35,19 @@ mergelog.txt
 *.sln.docstates
 
 # Build results
+[Aa]rtifacts/
+[Dd]ebug/
+[Rr]elease/
+!eng/[Rr]elease
+[Bb]in/
+[Oo]bj/
+[Pp]ackages/
+x64/
+.dotnet/
+.dotnet-test/
+.packages/
+.tools/
+.vscode/
 
 # Roslyn cache directories
 **/*.ide/
