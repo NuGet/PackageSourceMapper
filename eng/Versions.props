@@ -7,9 +7,9 @@
     <!-- Opt-out repo features -->
     <UsingToolXliff>false</UsingToolXliff>
     <!-- Libs -->
-    <MicrosoftSourceLinkGitHubVersion>1.2.0-beta-22071-02</MicrosoftSourceLinkGitHubVersion>
+    <MicrosoftSourceLinkGitHubVersion>1.2.0-beta-22165-02</MicrosoftSourceLinkGitHubVersion>
     <!-- Used to flow Source Link version through Arcade SDK -->
     <MicrosoftSourceLinkVersion>$(MicrosoftSourceLinkGitHubVersion)</MicrosoftSourceLinkVersion>
-    <MicrosoftTemplateEngineTasksVersion>7.0.100-alpha.1.21601.1</MicrosoftTemplateEngineTasksVersion>
+    <MicrosoftTemplateEngineTasksVersion>7.0.100-preview.2.22075.3</MicrosoftTemplateEngineTasksVersion>
   </PropertyGroup>
 </Project>
