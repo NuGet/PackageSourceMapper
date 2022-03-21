@@ -74,4 +74,4 @@ Generate packageSourceMapping section without any prefixing:
 
 ## Feedback
 
-File NuGet.Client bugs in the [NuGet/PackageSourceMapper](https://github.com/NuGet/PackageSourceMapper/issues) 
+File NuGet.Client bugs in the [NuGet/PackageSourceMapper](https://github.com/NuGet/PackageSourceMapper/issues)
