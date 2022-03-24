@@ -43,7 +43,7 @@ namespace NuGet.PackageSourceMapper
                     continue;
                 }
 
-                packageSourceMapping.AppendLine($"  <packageSource key = \"{ sourceKey}\">");
+                packageSourceMapping.AppendLine($"  <packageSource key=\"{ sourceKey}\">");
 
                 List<string> uniquePackageIdsInSource = sources[sourceUri].Select(p => p.Id).Distinct().OrderBy(p => p).ToList();
                 string currentPrefix = null;
