@@ -15,7 +15,7 @@ trigger:
 
 parameters:
 - name: SignType
-  default: real
+  default: test
   type: string
   values:
   - real
@@ -33,36 +33,27 @@ stages:
   - job: OfficialBuild
     displayName: Official Build
 
-    # steps:
-    # - task: ms-vseng.MicroBuildTasks.30666190-6959-11e5-9f96-f56098202fef.MicroBuildSigningPlugin@1
-    #   displayName: Install Signing Plugin
-    #   inputs:
-    #     signType: $(SignType)
-    #     esrpSigning: true
-    #   condition: and(succeeded(), ne(variables['SignType'], ''))
+    steps:
+    - task: ms-vseng.MicroBuildTasks.30666190-6959-11e5-9f96-f56098202fef.MicroBuildSigningPlugin@1
+      displayName: Install Signing Plugin
+      inputs:
+        signType: $(SignType)
+        esrpSigning: true
+      condition: and(succeeded(), ne(variables['SignType'], ''))
 
-    # - script: eng\common\CIBuild.cmd
-    #             -configuration $(BuildConfiguration)
-    #             /p:OfficialBuildId=$(Build.BuildNumber)
-    #             /p:VisualStudioDropName=$(VisualStudioDropName)
-    #             /p:DotNetSignType=$(SignType)
-    #             /p:DotNetSymbolServerTokenMsdl=$(microsoft-symbol-server-pat)
-    #             /p:DotNetSymbolServerTokenSymWeb=$(symweb-symbol-server-pat)
-    #             /p:DotNetFinalVersionKind=$(_additionalBuildArgs)
-    #             /p:DotNetArtifactsCategory=$(_DotNetArtifactsCategory)
-    #             /p:DotnetPublishUsingPipelines=true
-    #   displayName: Build
+    - script: eng\common\CIBuild.cmd
+                -configuration $(BuildConfiguration)
+                /p:OfficialBuildId=$(Build.BuildNumber)
+                /p:VisualStudioDropName=$(VisualStudioDropName)
+                /p:DotNetSignType=$(SignType)
+                /p:DotNetSymbolServerTokenMsdl=$(microsoft-symbol-server-pat)
+                /p:DotNetSymbolServerTokenSymWeb=$(symweb-symbol-server-pat)
+                /p:DotNetFinalVersionKind=$(_additionalBuildArgs)
+                /p:DotNetArtifactsCategory=$(_DotNetArtifactsCategory)
+                /p:DotnetPublishUsingPipelines=true
+      displayName: Build
 
     - template: eng\common\templates\steps\generate-sbom.yml
-
-    - task: PublishTestResults@2
-      displayName: Publish XUnit Test Results
-      inputs:
-        testRunner: XUnit
-        testResultsFiles: '$(Build.SourcesDirectory)\artifacts\TestResults\$(BuildConfiguration)\*.trx'
-        mergeTestResults: true
-        testRunTitle: 'Unit Tests'
-      condition: always()
 
     - task: PublishBuildArtifacts@1
       displayName: Publish Logs
@@ -101,4 +92,3 @@ stages:
         ArtifactName: MicroBuildOutputs
         publishLocation: Container
       condition: succeededOrFailed()
-      
