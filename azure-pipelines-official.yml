@@ -22,12 +22,17 @@ parameters:
   - test
 
 stages:
-- stage: build
-  displayName: Build and Test
+- stage: publish
+  displayName: Publishing
+  timeoutInMinutes: 120
+  variables:
+    - group: DotNet-Symbol-Server-Pats
+
   pool:
     name: NetCore1ESPool-Internal
-    demands:
-    - cmd
+    demands: 
+      - ImageOverride -equals 1es-windows-2022
+      - cmd
 
   jobs:
   - job: OfficialBuild
