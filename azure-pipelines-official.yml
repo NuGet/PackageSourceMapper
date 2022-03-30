@@ -24,7 +24,6 @@ parameters:
 stages:
 - stage: publish
   displayName: Publishing
-  timeoutInMinutes: 120
   variables:
     - group: DotNet-Symbol-Server-Pats
 
