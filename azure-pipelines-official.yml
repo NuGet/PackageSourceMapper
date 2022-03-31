@@ -13,14 +13,6 @@ variables:
 trigger:
 - dev
 
-parameters:
-- name: SignType
-  default: test
-  type: string
-  values:
-  - real
-  - test
-
 stages:
 - stage: publish
   displayName: Publishing
@@ -42,17 +34,14 @@ stages:
       displayName: Install Signing Plugin
       inputs:
         signType: $(SignType)
-        esrpSigning: true
       condition: and(succeeded(), ne(variables['SignType'], ''))
 
     - script: eng\common\CIBuild.cmd
                 -configuration $(BuildConfiguration)
                 /p:OfficialBuildId=$(Build.BuildNumber)
-                /p:VisualStudioDropName=$(VisualStudioDropName)
                 /p:DotNetSignType=$(SignType)
                 /p:DotNetSymbolServerTokenMsdl=$(microsoft-symbol-server-pat)
                 /p:DotNetSymbolServerTokenSymWeb=$(symweb-symbol-server-pat)
-                /p:DotNetFinalVersionKind=$(_additionalBuildArgs)
                 /p:DotNetArtifactsCategory=$(_DotNetArtifactsCategory)
                 /p:DotnetPublishUsingPipelines=true
       displayName: Build
