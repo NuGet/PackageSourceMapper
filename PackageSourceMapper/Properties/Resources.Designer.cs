@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace PackageSourceMapper.Properties {
+namespace NuGet.PackageSourceMapper.Properties {
     using System;
     
     
@@ -19,7 +19,7 @@ namespace PackageSourceMapper.Properties {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Resources {
@@ -39,7 +39,7 @@ namespace PackageSourceMapper.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("PackageSourceMapper.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("NuGet.PackageSourceMapper.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -252,7 +252,7 @@ namespace PackageSourceMapper.Properties {
         ///         -  Close VS and reopen VS to new nuget.config to take effect.
         ///         -  Restore and build with new settings.
         ///         -  Make sure there is no error or warnings.
-        ///         -  Re-run the tool with new config and  --detailedReport to verify if packages are coming from desired sources..
+        ///         -  Re-run the tool with new config and --verbosity detailed to verify if packages are coming from desired sources..
         /// </summary>
         internal static string VerifyResult {
             get {

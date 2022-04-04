@@ -2,8 +2,8 @@
 <Project>
   <PropertyGroup>
     <!-- This repo version -->
-    <VersionPrefix>0.26.1</VersionPrefix>
-    <PreReleaseVersionLabel>beta</PreReleaseVersionLabel>
+    <VersionPrefix>0.1.0</VersionPrefix>
+    <PreReleaseVersionLabel>preview</PreReleaseVersionLabel>
     <!-- Opt-out repo features -->
     <UsingToolXliff>false</UsingToolXliff>
     <!-- Libs -->
