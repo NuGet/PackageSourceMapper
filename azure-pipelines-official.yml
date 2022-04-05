@@ -22,7 +22,7 @@ stages:
   pool:
     name: NetCore1ESPool-Internal
     demands: 
-      - ImageOverride -equals 1es-windows-2022
+      - ImageOverride -equals Build.Windows.Amd64.VS2022
       - cmd
 
   jobs:
