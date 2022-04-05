@@ -6,7 +6,7 @@ namespace NuGet.PackageSourceMapper.Common
 {
     internal static class LocalizedResourceManager
     {
-        private static readonly ResourceManager _resourceManager = new ResourceManager("PackageSourceMapper.Properties.Resources", typeof(LocalizedResourceManager).Assembly);
+        private static readonly ResourceManager _resourceManager = new ResourceManager("NuGet.PackageSourceMapper.Properties.Resources", typeof(LocalizedResourceManager).Assembly);
 
         public static string GetString(string resourceName)
         {
