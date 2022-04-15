@@ -17,6 +17,7 @@
     <Copyright>© Microsoft Corporation. All rights reserved.</Copyright>
     <PackageProjectUrl>https://github.com/erdembayar/SourceMapper</PackageProjectUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageIcon>images/icon.png</PackageIcon>
     <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
 	<PublishRepositoryUrl>true</PublishRepositoryUrl>
 	<IncludeSymbols>true</IncludeSymbols>
@@ -29,6 +30,7 @@
       <Pack>True</Pack>
 		<PackagePath>\</PackagePath>
     </None>
+      <None Include="../icon.png" Pack="true" Visible="false" PackagePath="images/icon.png" />  
   </ItemGroup>
 	
   <ItemGroup>
