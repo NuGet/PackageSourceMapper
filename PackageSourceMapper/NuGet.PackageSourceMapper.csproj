@@ -15,7 +15,7 @@
     <PackageOutputPath>./nupkg</PackageOutputPath>
     <PackageReadmeFile>Readme.md</PackageReadmeFile>
     <Copyright>© Microsoft Corporation. All rights reserved.</Copyright>
-    <PackageProjectUrl>https://github.com/erdembayar/SourceMapper</PackageProjectUrl>
+    <PackageProjectUrl>https://github.com/NuGet/PackageSourceMapper</PackageProjectUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageIcon>images/icon.png</PackageIcon>
     <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
