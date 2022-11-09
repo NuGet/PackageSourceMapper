@@ -8,6 +8,10 @@ variables:
     value: .NETCore
   - name: _DotNetValidationArtifactsCategory
     value: .NETCoreValidation
+  - name: Codeql.Enabled
+    value: $(SignType) -eq "Real"
+  - name: Codeql.TSAEnabled
+    value:  $(SignType) -eq "Real"
 
 # Branches that trigger a build on commit
 trigger:
@@ -30,6 +34,10 @@ stages:
     displayName: Official Build
 
     steps:
+    - task: CodeQL3000Init@0
+      displayName: Initialize CodeQL
+      condition: "and(succeeded(), eq(variables['Codeql.Enabled'], 'true'))"
+
     - task: NuGetAuthenticate@0
         
     - task: MicroBuildSigningPlugin@3
@@ -51,6 +59,10 @@ stages:
                 /p:DotNetArtifactsCategory=$(_DotNetArtifactsCategory)
                 /p:DotnetPublishUsingPipelines=true
       displayName: Build
+
+    - task: CodeQL3000Finalize@0
+      displayName: Finalize CodeQL
+      condition: "and(succeeded(), eq(variables['Codeql.Enabled'], 'true'))"
 
     - template: eng\common\templates\steps\generate-sbom.yml
 
