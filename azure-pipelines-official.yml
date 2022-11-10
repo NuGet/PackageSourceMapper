@@ -35,18 +35,18 @@ stages:
 
     steps:
     - bash: |
-        echo 'Sign type:' $(SignType)
-        echo 'Codeql.Enabled:' '$(Codeql.Enabled)' $(variables['Codeql.Enabled'])  ${{ Codeql.Enabled }}
-        echo 'Codeql.TSAEnabled:' '$(Codeql.TSAEnabled)' $(variables['Codeql.TSAEnabled'])  ${{ Codeql.TSAEnabled }}
         if [ "$(SignType)" = "Real" ]; then
-            echo "##vso[task.setvariable variable=Codeql.Enabled]true"
-            echo "##vso[task.setvariable variable=Codeql.TSAEnabled]true"
+          echo 'Codeql scan enabled'
+          echo "##vso[task.setvariable variable=Codeql.Enabled]true"
+          echo "##vso[task.setvariable variable=Codeql.TSAEnabled]true"
+        else
+          echo 'Codeql scan Disabled'
         fi     
-      displayName: "Print env var"    
+      displayName: "Set CodeQl variables"    
 
     - task: CodeQL3000Init@0
       displayName: Initialize CodeQL
-      condition: "and(succeeded(), eq(variables['Codeql.Enabled'], 'Real'))"
+      condition: "and(succeeded(), eq(variables['Codeql.Enabled'], 'true'))"
 
     - task: NuGetAuthenticate@0
         
@@ -72,7 +72,7 @@ stages:
 
     - task: CodeQL3000Finalize@0
       displayName: Finalize CodeQL
-      condition: "and(succeeded(), eq(variables['Codeql.Enabled'], 'Real'))"
+      condition: "and(succeeded(), eq(variables['Codeql.Enabled'], 'true'))"
 
     - template: eng\common\templates\steps\generate-sbom.yml
 
