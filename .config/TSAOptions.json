@@ -1,7 +1,7 @@
 
 {
     "tsaVersion": "TsaV2",
-    "codebaseName": "nuget-packageSourceMapper",
+    "codebaseName": "NuGet.PackageSourceMapper_dev",
     "instanceUrl": "DEVDIV",
     "projectName": "DevDiv",
     "areaPath": "DevDiv\\NuGet\\NuGet Clients",
