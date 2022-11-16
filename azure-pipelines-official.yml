@@ -12,6 +12,10 @@ variables:
     value: false
   - name: Codeql.TSAEnabled
     value:  false
+  - name: Codeql.TSAOptionsPath
+    value:  $(Build.SourcesDirectory)\.config\TSAOptions.json
+  - name: notificationAlias
+    value: $(TsaNotificationEmail)
 
 # Branches that trigger a build on commit
 trigger:
@@ -34,6 +38,17 @@ stages:
     displayName: Official Build
 
     steps:
+    - task: CredScan@2
+      inputs:
+        toolMajorVersion: "V2"
+
+    - task: PoliCheck@2
+      inputs:
+        inputType: "Basic"
+        targetType: "F"
+        targetArgument: "$(Build.SourcesDirectory)"
+        result: "PoliCheck.xml"
+
     - bash: |
         if [ "$(SignType)" = "Real" ]; then
           echo 'Codeql scan enabled'
@@ -92,6 +107,21 @@ stages:
         ArtifactName: 'TestResults'
         publishLocation: Container
       condition: not(succeeded())
+
+    - task: SdtReport@2
+      displayName: "Generate Analysis Report"
+      inputs:
+        CredScan: true
+        PoliCheck: true
+        APIScan: false
+        ToolLogsNotFoundAction: "Standard"
+
+    - task: TSAUpload@2
+      displayName: "TSA upload to Codebase NuGet.PackageSourceMapper"
+      inputs:
+        GdnPublishTsaOnboard: false
+        GdnPublishTsaConfigFile: '$(Build.SourcesDirectory)\.config\TSAConfig.gdntsa'  # All relevant settings are in this file.
+        GdnPublishTsaExportedResultsPublishable: true
 
     # Publish our NuPkgs as an artifact. The name of this artifact must be PackageArtifacts as the
     # arcade templates depend on the name.'

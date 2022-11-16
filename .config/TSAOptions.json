@@ -1,10 +1,14 @@
 
 {
     "tsaVersion": "TsaV2",
+    "codebase": "NewOrUpdate",
     "codebaseName": "NuGet.PackageSourceMapper_dev",
-    "instanceUrl": "DEVDIV",
+    "tsaStamp": "DevDiv",
+    "tsaEnvironment": "PROD",
+    "instanceUrl": "https://devdiv.visualstudio.com",    
     "projectName": "DevDiv",
     "areaPath": "DevDiv\\NuGet\\NuGet Clients",
     "iterationPath": "DevDiv",
-    "allTools": true
+    "allTools": true,
+    "repositoryName": "NuGet.PackageSourceMapper"
 }
