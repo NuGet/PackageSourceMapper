@@ -1,10 +1,13 @@
 
 {
     "tsaVersion": "TsaV2",
+    "codebase": "NewOrUpdate",
     "codebaseName": "NuGet.PackageSourceMapper_dev",
     "instanceUrl": "DEVDIV",
+    "tsaStamp": "DevDiv",
     "projectName": "DevDiv",
     "areaPath": "DevDiv\\NuGet\\NuGet Clients",
     "iterationPath": "DevDiv",
-    "allTools": true
+    "allTools": true,
+    "repositoryName": "NuGet.PackageSourceMapper"
 }
