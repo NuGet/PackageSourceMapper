@@ -12,6 +12,8 @@ variables:
     value: false
   - name: Codeql.TSAEnabled
     value:  false
+  - name: Codeql.TSAOptionsPath
+    value:  $(Build.SourcesDirectory)\.config\TSAOptions.json
 
 # Branches that trigger a build on commit
 trigger:
@@ -95,12 +97,8 @@ stages:
 
     - task: TSAUpload@2
       displayName: "TSA upload to Codebase NuGet.PackageSourceMapper"
-      GdnPublishTsaConfigFile: '$(Build.SourcesDirectory)\.config\TSAOptions.json'
       inputs:
         tsaVersion: "TsaV2"
-        codebase: "$(TsaCodebase)"
-        tsaEnvironment: "PROD"
-        codeBaseName: "$(TsaCodebaseName)"
         notificationAlias: "$(TsaNotificationEmail)"
         codeBaseAdmins: "$(TsaCodebaseAdmins)"
         instanceUrlForTsaV2: "$(TsaInstanceUrl)"
@@ -118,6 +116,7 @@ stages:
         uploadRoslyn: false
         uploadTSLint: false
         uploadAsync: true
+        GdnPublishTsaConfigFile: '$(Build.SourcesDirectory)\.config\TSAOptions.json'
 
     # Publish our NuPkgs as an artifact. The name of this artifact must be PackageArtifacts as the
     # arcade templates depend on the name.'
