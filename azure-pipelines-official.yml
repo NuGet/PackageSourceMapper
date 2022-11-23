@@ -101,7 +101,6 @@ stages:
       displayName: "TSA upload to Codebase NuGet.PackageSourceMapper"
       inputs:
         tsaVersion: "TsaV2"
-        notificationAlias: $(TsaNotificationEmail)
         codeBaseAdmins: "$(TsaCodebaseAdmins)"
         instanceUrlForTsaV2: "$(TsaInstanceUrl)"
         projectNameDEVDIV: "$(TsaProjectName)"
