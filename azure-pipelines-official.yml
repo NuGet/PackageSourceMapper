@@ -14,6 +14,8 @@ variables:
     value:  false
   - name: Codeql.TSAOptionsPath
     value:  $(Build.SourcesDirectory)\.config\TSAOptions.json
+  - name: notificationAlias
+    value: $(TsaNotificationEmail)
 
 # Branches that trigger a build on commit
 trigger:
@@ -99,7 +101,7 @@ stages:
       displayName: "TSA upload to Codebase NuGet.PackageSourceMapper"
       inputs:
         tsaVersion: "TsaV2"
-        notificationAlias: "$(TsaNotificationEmail)"
+        notificationAlias: $(TsaNotificationEmail)
         codeBaseAdmins: "$(TsaCodebaseAdmins)"
         instanceUrlForTsaV2: "$(TsaInstanceUrl)"
         projectNameDEVDIV: "$(TsaProjectName)"
