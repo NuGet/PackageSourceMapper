@@ -95,6 +95,7 @@ stages:
 
     - task: TSAUpload@2
       displayName: "TSA upload to Codebase NuGet.PackageSourceMapper"
+      GdnPublishTsaConfigFile: '$(Build.SourcesDirectory)\.config\TSAOptions.json'
       inputs:
         tsaVersion: "TsaV2"
         codebase: "$(TsaCodebase)"
