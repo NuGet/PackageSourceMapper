@@ -39,6 +39,9 @@ stages:
 
     steps:
     - task: CredScan@3
+      inputs:
+        # Output in PREFast format so TSAUpload can consume it.
+        outputFormat: pre
 
     - task: PoliCheck@2
       inputs:
