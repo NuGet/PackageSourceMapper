@@ -1,9 +1,9 @@
 {
-    "codebaseName": "NuGet.PackageSourceMapper_dev",
-    "instanceUrl": "https://devdiv.visualstudio.com",
-    "projectName": "DevDiv",
-    "areaPath": "DevDiv\\NuGet\\NuGet Clients",
-    "iterationPath": "DevDiv",
+    "codebaseName": "$(TsaCodebaseName)",
+    "instanceUrl": "$(TsaInstanceUrl)",
+    "projectName": "$(TsaProjectName)",
+    "areaPath": "$(TsaBugAreaPath)",
+    "iterationPath": "$(TsaIterationPath)",
     "tools": [
         "CredScan",
         "PoliCheck"
