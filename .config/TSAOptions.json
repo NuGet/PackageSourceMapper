@@ -3,7 +3,7 @@
     "tsaVersion": "TsaV2",
     "codebase": "NewOrUpdate",
     "codebaseName": "$(TsaCodebaseName)",
-    "tsaStamp": "DevDiv",
+    "tsaStamp": "$(TsaStamp)",
     "tsaEnvironment": "PROD",
     "instanceUrl": "$(TsaInstanceUrl)",    
     "projectName": "$(TsaProjectName)",

@@ -1,9 +1,9 @@
 {
-    "codebaseName": "$(TsaCodebaseName)",
-    "instanceUrl": "$(TsaInstanceUrl)",
-    "projectName": "$(TsaProjectName)",
-    "areaPath": "$(TsaBugAreaPath)",
-    "iterationPath": "$(TsaIterationPath)",
+    "codebaseName": $(TsaCodebaseName),
+    "instanceUrl": $(TsaInstanceUrl),
+    "projectName": $(TsaProjectName),
+    "areaPath": $(TsaBugAreaPath),
+    "iterationPath": $(TsaIterationPath),
     "tools": [
         "CredScan",
         "PoliCheck"
