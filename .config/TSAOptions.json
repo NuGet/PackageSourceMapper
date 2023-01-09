@@ -8,7 +8,7 @@
     "instanceUrl": "$(TsaInstanceUrl)",    
     "projectName": "$(TsaProjectName)",
     "areaPath": "$(TsaBugAreaPath)",
-    "iterationPath": "DevDiv",
+    "iterationPath": "$(TsaIterationPath)",
     "allTools": true,
     "repositoryName": "NuGet.PackageSourceMapper"
 }
