@@ -2,13 +2,13 @@
 {
     "tsaVersion": "TsaV2",
     "codebase": "NewOrUpdate",
-    "codebaseName": "$(TsaCodebaseName)",
-    "tsaStamp": "$(TsaStamp)",
+    "codebaseName": "NuGet.PackageSourceMapper_dev",
+    "tsaStamp": "DevDiv",
     "tsaEnvironment": "PROD",
-    "instanceUrl": "$(TsaInstanceUrl)",    
-    "projectName": "$(TsaProjectName)",
-    "areaPath": "$(TsaBugAreaPath)",
-    "iterationPath": "$(TsaIterationPath)",
+    "instanceUrl": "https://devdiv.visualstudio.com",    
+    "projectName": "DevDiv",
+    "areaPath": "DevDiv\\NuGet\\NuGet Clients",
+    "iterationPath": "DevDiv",
     "allTools": true,
     "repositoryName": "NuGet.PackageSourceMapper"
 }
