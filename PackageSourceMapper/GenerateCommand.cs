@@ -133,11 +133,8 @@ namespace NuGet.PackageSourceMapper
 
             try
             {
-                using (Stream stream = File.OpenRead(nuspecPath))
-                {
-                    Manifest manifest = Manifest.ReadFrom(stream, validateSchema: false);
-                    return manifest.Metadata.Id;
-                }
+                NuspecReader nuspecReader = new NuspecReader(nuspecPath);
+                return nuspecReader.GetId();
             }
             catch (Exception ex)
             {
