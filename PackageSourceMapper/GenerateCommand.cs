@@ -54,6 +54,8 @@ namespace NuGet.PackageSourceMapper
                     var pathParts = metadataPath.Split(Path.DirectorySeparatorChar);
                     string packageId = pathParts[pathParts.Length - 3];
                     var packageVersion = Versioning.NuGetVersion.Parse(pathParts[pathParts.Length - 2]);
+                    string nuspecPath = Path.Combine(Path.GetDirectoryName(metadataPath), $"{packageId}.nuspec");
+                    packageId = GetPackageIdWithOriginalCasing(nuspecPath, logger) ?? packageId;
                     PackageIdentity packageIdentity = new PackageIdentity(packageId, packageVersion);
 
                     var sourcePath = metadata.Source;
@@ -120,6 +122,25 @@ namespace NuGet.PackageSourceMapper
             Console.WriteLine(string.Format(LocalizedResourceManager.GetString("FinishGeneration")));
             Console.WriteLine(string.Empty);
             logger.LogMinimal(string.Format(LocalizedResourceManager.GetString("VerifyResult")));
+        }
+
+        private static string GetPackageIdWithOriginalCasing(string nuspecPath, ILogger logger)
+        {
+            if (string.IsNullOrEmpty(nuspecPath) || !File.Exists(nuspecPath))
+            {
+                return null;
+            }
+
+            try
+            {
+                NuspecReader nuspecReader = new NuspecReader(nuspecPath);
+                return nuspecReader.GetId();
+            }
+            catch (Exception ex)
+            {
+                logger.LogError("    " + ex.Message);
+                return null;
+            }
         }
     }
 }
