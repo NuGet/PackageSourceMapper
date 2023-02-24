@@ -7,5 +7,6 @@ namespace NuGet.PackageSourceMapper
         public string GlobalPackagesFolder { get; set; }
         public ISettings Settings { get; set; }
         public bool IdPatternOnlyOption { get; set; }
+        public bool ReduceSourcesOption { get; set; }
     }
 }
