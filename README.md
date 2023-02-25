@@ -30,7 +30,7 @@ Here is steps to use the tool. It works for both packagereference and packages.c
 ## Synopsis:
 
 ```dotnetcli
-packagesourcemapper generate <CONFIGPATH> [-h|--help] [--verbosity <LEVEL>] [--id-pattern-only]
+packagesourcemapper generate <CONFIGPATH> [-h|--help] [--verbosity <LEVEL>] [--fully-specified]
 ```
 
 ### Commands
@@ -56,7 +56,7 @@ Show help information
 
   Sets the verbosity level of the command. Allowed values are `q[uiet]`, `m[inimal]`, `n[ormal]`, `d[etailed]`, and `diag[nostic]`. The default is `minimal`. For more information, see [LoggerVerbosity](https://docs.microsoft.com/en-us/dotnet/api/microsoft.build.framework.loggerverbosity?view=msbuild-16-netcore).
 
-#### `--id-pattern-only`
+#### `--fully-specified`
 
 Specify this option to generate full specified pattern instead without prefix. Currently only packages starting with `Microsoft, System, Runtime, Xunit` are prefixed by default.
 
@@ -70,7 +70,7 @@ Generate packageSourceMapping section:
 
 Generate packageSourceMapping section without any prefixing:
 
-`PackageSourceMapper.exe generate C:\NuGetProj\NuGet.Client\NuGet.Config --verbosity m --id-pattern-only`
+`PackageSourceMapper.exe generate C:\NuGetProj\NuGet.Client\NuGet.Config --verbosity m --fully-specified`
 
 ## Feedback
 
