@@ -20,9 +20,9 @@ namespace NuGet.PackageSourceMapper
         private static Dictionary<string, PackageSource> _packageSourceObjectLookup = new();
 
         // This signature must be exactly same as Generate method, including var names, and Option names.
-        delegate int GenerateDelegate(string configPath, string verbosity, bool fullySpecified, bool reduceSources);
+        delegate int GenerateDelegate(string configPath, string verbosity, bool fullySpecified, bool reduceUnusedSources);
 
-        private static int Generate(string configPath, string verbosity, bool fullySpecified, bool reduceSources)
+        private static int Generate(string configPath, string verbosity, bool fullySpecified, bool reduceUnusedSources)
         {
             int ret = ReturnCode.Ok;
             Logger logger = new Logger();
@@ -36,14 +36,14 @@ namespace NuGet.PackageSourceMapper
             Console.WriteLine($"    configPath : {configPath}");
             Console.WriteLine($"    --verbosity : {verbosity}");
             Console.WriteLine($"    --fully-specified : {fullySpecified}");
-            Console.WriteLine($"    --reduce-sources : {reduceSources}");
+            Console.WriteLine($"    --reduce-unused-sources : {reduceUnusedSources}");
             Console.WriteLine(string.Empty);
 #else
             logger.LogVerbose("Parameters:");
             logger.LogVerbose($"    configPath : {configPath}");
             logger.LogVerbose($"    --verbosity : {verbosity}");
             logger.LogVerbose($"    --fully-specified : {fullySpecified}");
-            logger.LogVerbose($"    --reduce-sources : {reduceSources}");
+            logger.LogVerbose($"    --reduce-unused-sources : {reduceSources}");
             logger.LogVerbose(string.Empty);
 #endif
 
@@ -117,7 +117,7 @@ namespace NuGet.PackageSourceMapper
                 GlobalPackagesFolder = globalPackageFolder,
                 Settings = settings,
                 IdPatternOnlyOption = fullySpecified,
-                ReduceSourcesOption = reduceSources,
+                ReduceUnusedSourcesOption = reduceUnusedSources,
             };
 
             Execute(request, logger, _sourceRepositoryCache);
@@ -137,7 +137,7 @@ namespace NuGet.PackageSourceMapper
             generateCommand.AddArgument(config());
             generateCommand.AddOption(Verbosity());
             generateCommand.AddOption(FullySpecifiedOption());
-            generateCommand.AddOption(ReduceSourcesOption());
+            generateCommand.AddOption(ReduceUnusedSourcesOption());
             return generateCommand;
         }
 
@@ -159,9 +159,9 @@ namespace NuGet.PackageSourceMapper
                 aliases: new[] { "--fully-specified" },
                 description: "Specify this option to generate full specified pattern instead without prefix.");
 
-        private static Option ReduceSourcesOption() =>
+        private static Option ReduceUnusedSourcesOption() =>
             new Option(
-                aliases: new[] { "--reduce-sources" },
+                aliases: new[] { "--reduce-unused-sources" },
                 description: "Specify this option if the packagesourcemapper should attempt to reduce the number of sources used in nuget.config by consolidating them");
 
         /// <summary>

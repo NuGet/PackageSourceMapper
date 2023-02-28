@@ -60,7 +60,7 @@ Show help information
 
 Specify this option to generate full specified pattern instead without prefix. Currently only packages starting with `Microsoft, System, Runtime, Xunit` are prefixed by default.
 
-#### `--reduce-sources`
+#### `--reduce-unused-sources`
 
 Specify this option if the packagesourcemapper should attempt to reduce the number of sources used in nuget.config by consolidating them.
 

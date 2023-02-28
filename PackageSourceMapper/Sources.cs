@@ -54,11 +54,11 @@ namespace NuGet.PackageSourceMapper
             List<PackageSource> sourcesCanBeRemoved = new();
             IOrderedEnumerable<KeyValuePair<PackageSource, HashSet<PackageIdentity>>> sourcesDescendingByPackageCount = null;
 
-            if (request.ReduceSourcesOption)
+            if (request.ReduceUnusedSourcesOption)
             {
                 Dictionary<PackageSource, HashSet<PackageIdentity>> sourcesToPackage = new();
 
-                logger.LogMinimal(Environment.NewLine + "    --reduce-sources option requires internet connection to sources used for restore!");
+                logger.LogMinimal(Environment.NewLine + "    --reduce-unused-sources option requires internet connection to sources used for restore!");
                 SourceCacheContext cache = new SourceCacheContext();
 
                 foreach (SourceRepository repository in _sourceRepositoryCache.Values)
@@ -97,7 +97,7 @@ namespace NuGet.PackageSourceMapper
 
                 List<PackageIdentity> allPackageIdentities = allPackages.Select(x => x.PackageIdentity).ToList();
                 // Simple greedy algorithm, it can be improved later, brute force solution which covers all possible scenario would be O(n!*m) time complexity, here n is number of sources and m is number of packages.
-                // With simple greedy algorithm is O(n)*m.
+                // With simple greedy algorithm is O(n*m).
                 int lastCount = allPackageIdentities.Count;
                 foreach (KeyValuePair<PackageSource, HashSet<PackageIdentity>> sourcePackages in sourcesDescendingByPackageCount)
                 {
