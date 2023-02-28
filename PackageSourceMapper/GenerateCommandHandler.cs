@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.CommandLine;
 using System.CommandLine.Binding;
 using System.IO;
+using System.Threading.Tasks;
 
 namespace NuGet.PackageSourceMapper
 {
@@ -20,9 +21,9 @@ namespace NuGet.PackageSourceMapper
         private static Dictionary<string, PackageSource> _packageSourceObjectLookup = new();
 
         // This signature must be exactly same as Generate method, including var names, and Option names.
-        delegate int GenerateDelegate(string configPath, string verbosity, bool fullySpecified, bool reduceUnusedSources);
+        delegate Task<int> GenerateDelegateAsync(string configPath, string verbosity, bool fullySpecified, bool reduceUnusedSources);
 
-        private static int Generate(string configPath, string verbosity, bool fullySpecified, bool reduceUnusedSources)
+        private static async Task<int> GenerateAsync(string configPath, string verbosity, bool fullySpecified, bool reduceUnusedSources)
         {
             int ret = ReturnCode.Ok;
             Logger logger = new Logger();
@@ -120,7 +121,7 @@ namespace NuGet.PackageSourceMapper
                 ReduceUnusedSourcesOption = reduceUnusedSources,
             };
 
-            Execute(request, logger, _sourceRepositoryCache);
+            await ExecuteAsync(request, logger, _sourceRepositoryCache);
 
             return ret;
         }
@@ -131,7 +132,7 @@ namespace NuGet.PackageSourceMapper
                 name: "generate",
                 description: "This command generate package source mapping section for package source mapping feature from solution/project's nuget.config file or global packages folder. Please run this tool after NuGet package restore, it'll genereate nugetPackageSourceMapping.config file if successfull, also it detects when a NuGet package id is on more than one feeds and if there is any content discrepency between source and file on disc. For more info check https://devblogs.microsoft.com/nuget/introducing-package-source-mapping/")
             {
-                Handler = HandlerDescriptor.FromDelegate((GenerateDelegate)Generate).GetCommandHandler()
+                Handler = HandlerDescriptor.FromDelegate((GenerateDelegateAsync)GenerateAsync).GetCommandHandler()
             };
 
             generateCommand.AddArgument(config());
