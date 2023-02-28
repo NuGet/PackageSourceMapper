@@ -63,20 +63,21 @@ namespace NuGet.PackageSourceMapper
 
                 foreach (SourceRepository repository in _sourceRepositoryCache.Values)
                 {
-                    PackageMetadataResource resource = await repository.GetResourceAsync<PackageMetadataResource>();
+                    FindPackageByIdResource resource = await repository.GetResourceAsync<FindPackageByIdResource>();
                     sourcesToPackage[repository.PackageSource] = new HashSet<PackageIdentity>();
                     try
                     {
                         logger.LogMinimal(Environment.NewLine + $"Started probing source:{repository.PackageSource} for package availability");
                         foreach (PackageData packageData in allPackages)
                         {
-                            IPackageSearchMetadata packageMeta = await resource.GetMetadataAsync(
-                                packageData.PackageIdentity,
+                            bool exists = await resource.DoesPackageExistAsync(
+                                packageData.PackageIdentity.Id,
+                                packageData.PackageIdentity.Version,
                                 cache,
                                 logger,
                                 CancellationToken.None);
 
-                            if (packageMeta != null)
+                            if (exists)
                             {
                                 logger.LogMinimal($"     {packageData.PackageIdentity} is found in this source.");
                                 sourcesToPackage[repository.PackageSource].Add(packageData.PackageIdentity);
