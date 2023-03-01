@@ -9,12 +9,13 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace NuGet.PackageSourceMapper
 {
     internal static partial class GenerateCommandHandler
     {
-        private static void Execute(Request request, ILogger logger)
+        private static async Task ExecuteAsync(Request request, ILogger logger, Dictionary<PackageSource, SourceRepository> _sourceRepositoryCache)
         {
             Dictionary<string, PackageSource> definedSourcesDict = null;
             HashSet<string> undefinedSources = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
@@ -115,7 +116,7 @@ namespace NuGet.PackageSourceMapper
             PrintStatistics(sources, logger);
 
             // Probe sources for package availability and update them.
-            ConcurrentDictionary<PackageIdentity, PackageSource> packageSourceLookup = ProbSources(request, sources, logger);
+            ConcurrentDictionary<PackageIdentity, PackageSource> packageSourceLookup = await ProbSourcesAsync(request, sources, _sourceRepositoryCache, logger);
 
             GeneratePackageSourceMappingSection(request, packageSourceLookup, logger);
 

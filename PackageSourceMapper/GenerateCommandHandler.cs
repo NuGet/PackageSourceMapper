@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.CommandLine;
 using System.CommandLine.Binding;
 using System.IO;
+using System.Threading.Tasks;
 
 namespace NuGet.PackageSourceMapper
 {
@@ -20,9 +21,9 @@ namespace NuGet.PackageSourceMapper
         private static Dictionary<string, PackageSource> _packageSourceObjectLookup = new();
 
         // This signature must be exactly same as Generate method, including var names, and Option names.
-        delegate int GenerateDelegate(string configPath, string verbosity, bool fullySpecified);
+        delegate Task<int> GenerateDelegateAsync(string configPath, string verbosity, bool fullySpecified, bool reduceUnusedSources);
 
-        private static int Generate(string configPath, string verbosity, bool fullySpecified)
+        private static async Task<int> GenerateAsync(string configPath, string verbosity, bool fullySpecified, bool removeUnusedSources)
         {
             int ret = ReturnCode.Ok;
             Logger logger = new Logger();
@@ -36,12 +37,14 @@ namespace NuGet.PackageSourceMapper
             Console.WriteLine($"    configPath : {configPath}");
             Console.WriteLine($"    --verbosity : {verbosity}");
             Console.WriteLine($"    --fully-specified : {fullySpecified}");
+            Console.WriteLine($"    --remove-unused-sources : {removeUnusedSources}");
             Console.WriteLine(string.Empty);
 #else
             logger.LogVerbose("Parameters:");
             logger.LogVerbose($"    configPath : {configPath}");
             logger.LogVerbose($"    --verbosity : {verbosity}");
             logger.LogVerbose($"    --fully-specified : {fullySpecified}");
+            logger.LogVerbose($"    --remove-unused-sources : {removeUnusedSources}");
             logger.LogVerbose(string.Empty);
 #endif
 
@@ -115,9 +118,10 @@ namespace NuGet.PackageSourceMapper
                 GlobalPackagesFolder = globalPackageFolder,
                 Settings = settings,
                 IdPatternOnlyOption = fullySpecified,
+                RemoveUnusedSourcesOption = removeUnusedSources,
             };
 
-            Execute(request, logger);
+            await ExecuteAsync(request, logger, _sourceRepositoryCache);
 
             return ret;
         }
@@ -128,12 +132,13 @@ namespace NuGet.PackageSourceMapper
                 name: "generate",
                 description: "This command generate package source mapping section for package source mapping feature from solution/project's nuget.config file or global packages folder. Please run this tool after NuGet package restore, it'll genereate nugetPackageSourceMapping.config file if successfull, also it detects when a NuGet package id is on more than one feeds and if there is any content discrepency between source and file on disc. For more info check https://devblogs.microsoft.com/nuget/introducing-package-source-mapping/")
             {
-                Handler = HandlerDescriptor.FromDelegate((GenerateDelegate)Generate).GetCommandHandler()
+                Handler = HandlerDescriptor.FromDelegate((GenerateDelegateAsync)GenerateAsync).GetCommandHandler()
             };
 
             generateCommand.AddArgument(config());
             generateCommand.AddOption(Verbosity());
             generateCommand.AddOption(FullySpecifiedOption());
+            generateCommand.AddOption(RemoveUnusedSourcesOption());
             return generateCommand;
         }
 
@@ -154,6 +159,11 @@ namespace NuGet.PackageSourceMapper
             new Option(
                 aliases: new[] { "--fully-specified" },
                 description: "Specify this option to generate full specified pattern instead without prefix.");
+
+        private static Option RemoveUnusedSourcesOption() =>
+            new Option(
+                aliases: new[] { "--remove-unused-sources" },
+                description: "Specify this option if the packagesourcemapper should attempt to reduce the number of sources used in nuget.config by consolidating them");
 
         /// <summary>
         /// Note that the .NET CLI itself has parameter parsing which limits the values that will be passed here by the
