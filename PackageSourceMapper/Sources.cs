@@ -54,11 +54,11 @@ namespace NuGet.PackageSourceMapper
             List<PackageSource> sourcesCanBeRemoved = new();
             IOrderedEnumerable<KeyValuePair<PackageSource, HashSet<PackageIdentity>>> sourcesDescendingByPackageCount = null;
 
-            if (request.ReduceUnusedSourcesOption)
+            if (request.RemoveUnusedSourcesOption)
             {
                 Dictionary<PackageSource, HashSet<PackageIdentity>> sourcesToPackage = new();
 
-                logger.LogMinimal(Environment.NewLine + "    --reduce-unused-sources option requires internet connection to sources used for restore!");
+                logger.LogMinimal(Environment.NewLine + "    --remove-unused-sources option requires internet connection to sources used for restore!");
                 SourceCacheContext cache = new SourceCacheContext();
 
                 foreach (SourceRepository repository in _sourceRepositoryCache.Values)
