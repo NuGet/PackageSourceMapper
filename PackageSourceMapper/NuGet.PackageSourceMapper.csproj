@@ -19,10 +19,10 @@
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageIcon>images/icon.png</PackageIcon>
     <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
-	<PublishRepositoryUrl>true</PublishRepositoryUrl>
-	<IncludeSymbols>true</IncludeSymbols>
-	<EmbedUntrackedSources>true</EmbedUntrackedSources>
-	<AssemblyName>NuGet.PackageSourceMapper</AssemblyName>
+	  <PublishRepositoryUrl>true</PublishRepositoryUrl>
+	  <IncludeSymbols>true</IncludeSymbols>
+	  <EmbedUntrackedSources>true</EmbedUntrackedSources>
+	  <AssemblyName>NuGet.PackageSourceMapper</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>
