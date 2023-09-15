@@ -3,7 +3,7 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFrameworks>net6.0</TargetFrameworks>
-	  <LangVersion>9.0</LangVersion>
+    <VersionPrefix>1.1.0</VersionPrefix>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -19,10 +19,10 @@
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageIcon>images/icon.png</PackageIcon>
     <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
-	<PublishRepositoryUrl>true</PublishRepositoryUrl>
-	<IncludeSymbols>true</IncludeSymbols>
-	<EmbedUntrackedSources>true</EmbedUntrackedSources>
-	<AssemblyName>NuGet.PackageSourceMapper</AssemblyName>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <IncludeSymbols>true</IncludeSymbols>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <AssemblyName>NuGet.PackageSourceMapper</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>
